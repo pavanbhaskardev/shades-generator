@@ -39,7 +39,7 @@ const Footer = () => {
             <FaInstagram className="social-media-icons" />
           </a>
         </HStack>
-        <Tag colorScheme="messenger">Version 1.1</Tag>
+        <Tag colorScheme="messenger">Version 1.2</Tag>
       </VStack>
     </>
   );
