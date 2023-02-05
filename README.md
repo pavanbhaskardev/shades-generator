@@ -1,5 +1,5 @@
 
-# shades-generator version 1.1
+# shades-generator version 1.2
 
 shades generator helps you to generate mutlile shades for a single color, and you can directly copy the color code directly to clipboard
 
