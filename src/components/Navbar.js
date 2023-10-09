@@ -6,8 +6,9 @@ import {
   Spacer,
   Tooltip,
   Center,
+  useColorMode,
+  useColorModeValue,
 } from "@chakra-ui/react";
-import { useColorMode, useColorModeValue } from "@chakra-ui/color-mode";
 import "../CSS/global.css";
 import { FaSun, FaMoon } from "react-icons/fa";
 

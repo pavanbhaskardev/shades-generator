@@ -28,7 +28,9 @@ const Main = () => {
   //chakra toast on copy color
   const toast = useToast();
 
-  function generateColorCode() {
+  function generateColorCode(e) {
+    e.preventDefault();
+
     if (
       colorCode.length < 6 ||
       colorCode.length > 7 ||
@@ -102,7 +104,9 @@ const Main = () => {
     if (shadesList.length > 10 && shadesList.length < 20) {
       toast({
         description: `sorry we could generate only ${shadesList.length} shades for this color`,
+        position: "bottom-right",
         status: "info",
+        isClosable: true,
         duration: 4000,
       });
     }
@@ -110,12 +114,13 @@ const Main = () => {
 
   //Copy hexcode to clipboard
   const copyHexCode = (hexCode) => {
-    navigator.clipboard.writeText(hexCode);
-    console.log("copied code", hexCode);
+    navigator.clipboard.writeText(hexCode.toUpperCase());
     toast({
-      description: `${hexCode} copied to clipboard`,
+      description: `${hexCode.toUpperCase()} copied to clipboard`,
+      position: "bottom-right",
       status: "success",
       duration: 2000,
+      isClosable: true,
     });
   };
 
@@ -125,8 +130,10 @@ const Main = () => {
     navigator.clipboard.writeText(rgbColorCode);
     toast({
       description: `${rgbColorCode} copied to clipboard`,
+      position: "bottom-right",
       status: "success",
       duration: 2000,
+      isClosable: true,
     });
   };
 
@@ -146,24 +153,25 @@ const Main = () => {
           </Alert>
         </Center>
       ) : null}
-      <Flex px={[3, 3, 3, 0]} gap={2} mt={5}>
-        <Input
-          placeholder="Enter Hexcode..."
-          defaultValue={colorCode}
-          onChange={(e) => {
-            setColorCode(e.target.value);
-          }}
-          _placeholder={{ opacity: 1, color: "gray.500" }}
-        />
-        <Button
-          colorScheme="messenger"
-          onClick={() => {
-            generateColorCode();
-          }}
-        >
-          Generate
-        </Button>
-      </Flex>
+      <form onSubmit={generateColorCode}>
+        <Flex px={[3, 3, 3, 0]} gap={2} mt={5}>
+          <Input
+            placeholder="Enter Hexcode..."
+            defaultValue={colorCode}
+            onChange={(e) => {
+              setColorCode(e.target.value);
+            }}
+            _placeholder={{ opacity: 1, color: "gray.500" }}
+          />
+          <Button
+            colorScheme="messenger"
+            htmlType="submit"
+            onClick={generateColorCode}
+          >
+            Generate
+          </Button>
+        </Flex>
+      </form>
 
       {/* table */}
       {colorList.length ? (
@@ -200,7 +208,7 @@ const Main = () => {
                         copyHexCode(hexCode);
                       }}
                     >
-                      {hexCode}
+                      {hexCode.toUpperCase()}
                     </Td>
                   </Tr>
                 );
